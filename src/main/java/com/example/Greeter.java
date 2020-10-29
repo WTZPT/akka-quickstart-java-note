@@ -75,6 +75,9 @@ public class Greeter extends AbstractBehavior<Greeter.Greet> {
   private Behavior<Greet> onGreet(Greet command) {
     getContext().getLog().info("Hello {}!", command.whom);
     //#greeter-send-message
+    /**
+     * Greeter Actor使用tell方法向Greeted Actor发送消息，这是一个不阻塞调用者线程的异步操作
+     */
     command.replyTo.tell(new Greeted(command.whom, getContext().getSelf()));
     //#greeter-send-message
     return this;
